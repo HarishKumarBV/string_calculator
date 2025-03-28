@@ -5,11 +5,10 @@ class StringCalculator
         if input.match?(/-?\d+/) && input.match?(/-/)
             raise "negatives not allowed: #{input.scan(/-?\d+/).select { |num| num.to_i < 0 }.join(', ')}"
         end
-        
-        # return input.to_i if input.match?(/^\d+$/) # This line is not needed as we handle it in the map below
-        # numbers = input.split(/[\n,]/).map(&:to_i)
-
+        # handle custom delimiter
         delimiter = /[\n,]/ # Default delimiters
+        
+        # Check for custom delimiter
         if input.start_with?('//')
             parts = input.split("\n", 2)
             custom_delimiter = parts[0][2..-1] # Extract the custom delimiter
